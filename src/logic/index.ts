@@ -7,8 +7,8 @@ export const getSpinResult = (): any => {
     i++;
 
     if (i % 2) {
-        return sample(WIN_POSITIONS);
-    } else {
         return sample(LOSE_POSITIONS);
+    } else {
+        return sample(WIN_POSITIONS);
     }
 };
