@@ -79,9 +79,9 @@ export class BoardView extends Container {
         const angle = getSpinResult();
         anime({
             targets: this.wheel,
-            angle: 360 * 5 + angle,
-            duration: 3000,
-            easing: 'easeInOutSine',
+            angle: 360 * 4 + angle,
+            duration: 5000,
+            easing: 'easeInOutCirc',
             complete: () => {
                 this.wheel.angle = angle;
                 this.canSpin = true;
