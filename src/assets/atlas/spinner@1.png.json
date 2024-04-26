@@ -1,0 +1,87 @@
+{
+  "frames": {
+    "wheel.png": {
+      "frame": {
+        "x": 3,
+        "y": 3,
+        "w": 469,
+        "h": 469
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 49,
+        "y": 55,
+        "w": 469,
+        "h": 469
+      },
+      "sourceSize": {
+        "w": 569,
+        "h": 570
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "spin_button.png": {
+      "frame": {
+        "x": 478,
+        "y": 3,
+        "w": 155,
+        "h": 155
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 17,
+        "y": 18,
+        "w": 155,
+        "h": 155
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 191
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "arrow.png": {
+      "frame": {
+        "x": 478,
+        "y": 164,
+        "w": 56,
+        "h": 98
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 65,
+        "y": 46,
+        "w": 56,
+        "h": 98
+      },
+      "sourceSize": {
+        "w": 190,
+        "h": 190
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://github.com/odrick/free-tex-packer-core",
+    "version": "0.3.4",
+    "image": "spinner.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 636,
+      "h": 475
+    },
+    "scale": 1
+  }
+}
