@@ -1,23 +1,47 @@
 {
   "frames": {
-    "wheel.png": {
+    "ornament.png": {
       "frame": {
         "x": 3,
         "y": 3,
-        "w": 469,
-        "h": 469
+        "w": 553,
+        "h": 553
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 49,
-        "y": 55,
-        "w": 469,
-        "h": 469
+        "x": 0,
+        "y": 0,
+        "w": 553,
+        "h": 553
       },
       "sourceSize": {
-        "w": 569,
-        "h": 570
+        "w": 553,
+        "h": 553
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "wheel.png": {
+      "frame": {
+        "x": 562,
+        "y": 3,
+        "w": 475,
+        "h": 475
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 475,
+        "h": 475
+      },
+      "sourceSize": {
+        "w": 475,
+        "h": 475
       },
       "pivot": {
         "x": 0.5,
@@ -26,22 +50,22 @@
     },
     "spin_button.png": {
       "frame": {
-        "x": 478,
-        "y": 3,
-        "w": 155,
-        "h": 155
+        "x": 3,
+        "y": 562,
+        "w": 138,
+        "h": 138
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 17,
-        "y": 18,
-        "w": 155,
-        "h": 155
+        "x": 0,
+        "y": 0,
+        "w": 138,
+        "h": 138
       },
       "sourceSize": {
-        "w": 192,
-        "h": 191
+        "w": 138,
+        "h": 139
       },
       "pivot": {
         "x": 0.5,
@@ -50,22 +74,22 @@
     },
     "arrow.png": {
       "frame": {
-        "x": 478,
-        "y": 164,
-        "w": 56,
-        "h": 98
+        "x": 147,
+        "y": 562,
+        "w": 54,
+        "h": 94
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 65,
-        "y": 46,
-        "w": 56,
-        "h": 98
+        "x": 62,
+        "y": 44,
+        "w": 54,
+        "h": 94
       },
       "sourceSize": {
-        "w": 190,
-        "h": 190
+        "w": 183,
+        "h": 183
       },
       "pivot": {
         "x": 0.5,
@@ -79,8 +103,8 @@
     "image": "spinner.png",
     "format": "RGBA8888",
     "size": {
-      "w": 636,
-      "h": 475
+      "w": 1040,
+      "h": 703
     },
     "scale": 1
   }
