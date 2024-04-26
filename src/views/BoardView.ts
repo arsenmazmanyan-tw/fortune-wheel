@@ -29,6 +29,7 @@ export class BoardView extends Container {
     private ornament: Sprite;
     private wheel: Sprite;
     private spinButton: Sprite;
+    private canSpin = true;
 
     constructor() {
         super();
@@ -73,6 +74,8 @@ export class BoardView extends Container {
     }
 
     private onSpinClick(): void {
+        if (!this.canSpin) return;
+        this.canSpin = false;
         const angle = getSpinResult();
         anime({
             targets: this.wheel,
@@ -81,6 +84,7 @@ export class BoardView extends Container {
             easing: 'easeInOutSine',
             complete: () => {
                 this.wheel.angle = angle;
+                this.canSpin = true;
             },
         });
     }
