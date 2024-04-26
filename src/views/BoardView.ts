@@ -60,14 +60,12 @@ export class BoardView extends Container {
         this.wheel = Sprite.from('wheel.png');
         this.wheel.anchor.set(0.5);
         this.wheel.angle = -315;
-        this.wheel.position.set(7, -10);
         this.addChild(this.wheel);
     }
 
     private buildSpinButton(): void {
         this.spinButton = Sprite.from('spin_button.png');
         this.spinButton.anchor.set(0.5);
-        this.spinButton.position.set(9, -5);
         this.spinButton.eventMode = 'static';
         this.spinButton.on('pointerup', this.onSpinClick, this);
         this.addChild(this.spinButton);
