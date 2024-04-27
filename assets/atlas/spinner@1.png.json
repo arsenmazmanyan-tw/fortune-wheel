@@ -4,20 +4,20 @@
       "frame": {
         "x": 3,
         "y": 3,
-        "w": 553,
-        "h": 553
+        "w": 655,
+        "h": 678
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 553,
-        "h": 553
+        "x": 33,
+        "y": 22,
+        "w": 655,
+        "h": 678
       },
       "sourceSize": {
-        "w": 553,
-        "h": 553
+        "w": 720,
+        "h": 720
       },
       "pivot": {
         "x": 0.5,
@@ -26,22 +26,118 @@
     },
     "wheel.png": {
       "frame": {
-        "x": 562,
+        "x": 664,
         "y": 3,
-        "w": 475,
-        "h": 475
+        "w": 564,
+        "h": 559
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 76,
+        "y": 80,
+        "w": 564,
+        "h": 559
+      },
+      "sourceSize": {
+        "w": 720,
+        "h": 720
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "lose_popup.png": {
+      "frame": {
+        "x": 3,
+        "y": 687,
+        "w": 480,
+        "h": 270
       },
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 475,
-        "h": 475
+        "w": 480,
+        "h": 270
       },
       "sourceSize": {
-        "w": 475,
-        "h": 475
+        "w": 480,
+        "h": 270
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "win_popup.png": {
+      "frame": {
+        "x": 489,
+        "y": 687,
+        "w": 480,
+        "h": 270
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 480,
+        "h": 270
+      },
+      "sourceSize": {
+        "w": 480,
+        "h": 270
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "claim.png": {
+      "frame": {
+        "x": 975,
+        "y": 568,
+        "w": 184,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 184,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 184,
+        "h": 40
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "spin_again.png": {
+      "frame": {
+        "x": 664,
+        "y": 614,
+        "w": 184,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 184,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 184,
+        "h": 40
       },
       "pivot": {
         "x": 0.5,
@@ -50,46 +146,46 @@
     },
     "spin_button.png": {
       "frame": {
-        "x": 3,
-        "y": 562,
-        "w": 138,
-        "h": 138
+        "x": 975,
+        "y": 614,
+        "w": 163,
+        "h": 163
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 138,
-        "h": 138
+        "x": 31,
+        "y": 46,
+        "w": 163,
+        "h": 163
       },
       "sourceSize": {
-        "w": 138,
-        "h": 139
+        "w": 237,
+        "h": 245
       },
       "pivot": {
         "x": 0.5,
         "y": 0.5
       }
     },
-    "arrow.png": {
+    "close_button.png": {
       "frame": {
-        "x": 147,
-        "y": 562,
-        "w": 54,
-        "h": 94
+        "x": 664,
+        "y": 660,
+        "w": 12,
+        "h": 12
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 62,
-        "y": 44,
-        "w": 54,
-        "h": 94
+        "x": 4,
+        "y": 4,
+        "w": 12,
+        "h": 12
       },
       "sourceSize": {
-        "w": 183,
-        "h": 183
+        "w": 20,
+        "h": 20
       },
       "pivot": {
         "x": 0.5,
@@ -103,8 +199,8 @@
     "image": "spinner.png",
     "format": "RGBA8888",
     "size": {
-      "w": 1040,
-      "h": 703
+      "w": 1231,
+      "h": 960
     },
     "scale": 1
   }
