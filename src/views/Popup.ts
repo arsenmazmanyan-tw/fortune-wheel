@@ -1,43 +1,90 @@
 import { Container, Graphics, Sprite, Text, Texture } from 'pixi.js';
+import anime from 'animejs';
 
 const WIN_POPUP = Object.freeze({
     header: 'Congratulations!',
     message: 'You just won 100 freespins with up to 15,000\nJPY for Sevens&Fruits game by Playson!',
     buttonText: 'Claim!',
+    popupTexture: 'win_popup.png',
+    buttonTexture: 'claim.png',
 });
 
 const LOSE_POPUP = Object.freeze({
     header: "Whoops! That didn't land right!",
     message: "That's OK, though! There's always next time.",
     buttonText: 'Spin Again!',
+    popupTexture: 'lose_popup.png',
+    buttonTexture: 'spin_again.png',
 });
 
+export enum PopupType {
+    Win = 'win',
+    Lose = 'lose',
+}
 export class Popup extends Container {
-    public clicksEnabled = false;
-
+    private clicksEnabled = false;
     private bkg: Sprite;
     private header: Text;
     private message: Text;
     private closeButton: Sprite;
     private mainButton: Sprite;
 
+    private _type: PopupType = PopupType.Win;
+
     constructor() {
         super();
         this.build();
     }
 
+    get type(): PopupType {
+        return this._type;
+    }
+
+    public hide(): any {
+        this.clicksEnabled = false;
+        return anime({
+            targets: this.scale,
+            x: 0,
+            y: 0,
+            duration: 300,
+            easing: 'easeInOutCubic',
+        });
+    }
+
+    public show(type: 'win' | 'lose'): void {
+        type === 'win' ? this.setupForWinPopup() : this.setupForLosePopup();
+
+        this.visible = true;
+        anime({
+            targets: this.scale,
+            x: 1,
+            y: 1,
+            duration: 300,
+            easing: 'easeInOutCubic',
+            complete: () => {
+                this.clicksEnabled = true;
+            },
+        });
+    }
+
     public setupForWinPopup(): void {
+        this._type = PopupType.Win;
+
         // this.header.text = WIN_POPUP.header;
         // this.message.text = WIN_POPUP.message;
-        this.mainButton.texture = Texture.from('claim.png');
-        this.bkg.texture = Texture.from('win_popup.png');
+
+        this.mainButton.texture = Texture.from(WIN_POPUP.buttonTexture);
+        this.mainButton.position.set(0, 60);
+        this.bkg.texture = Texture.from(WIN_POPUP.popupTexture);
     }
 
     public setupForLosePopup(): void {
+        this._type = PopupType.Lose;
         // this.header.text = LOSE_POPUP.header;
         // this.message.text = LOSE_POPUP.message;
-        this.mainButton.texture = Texture.from('spin_again.png');
-        this.bkg.texture = Texture.from('lose_popup.png');
+        this.mainButton.texture = Texture.from(LOSE_POPUP.buttonTexture);
+        this.mainButton.position.set(0, 50);
+        this.bkg.texture = Texture.from(LOSE_POPUP.popupTexture);
     }
 
     private build(): void {
@@ -59,7 +106,7 @@ export class Popup extends Container {
         this.closeButton.anchor.set(0.5);
         this.closeButton.position.set(this.bkg.width / 2 - 35, -this.bkg.height / 2 + 35);
         this.closeButton.eventMode = 'static';
-        this.closeButton.on('pointerup', this.onClosButtonClick, this);
+        this.closeButton.on('pointerup', this.onCloseButtonClick, this);
         this.addChild(this.closeButton);
     }
 
@@ -94,15 +141,19 @@ export class Popup extends Container {
         this.addChild(this.mainButton);
     }
 
-    private onClosButtonClick(): void {
+    private onCloseButtonClick(): void {
         if (!this.clicksEnabled) return;
         this.clicksEnabled = false;
-        this.emit('closeButtonClick');
+        this.emit('closePopup', this.type);
     }
 
     private onMainButtonClick(): void {
         if (!this.clicksEnabled) return;
         this.clicksEnabled = false;
-        console.warn('main button click');
+
+        if (this.type === PopupType.Win) {
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+        }
+        this.emit('closePopup', this.type);
     }
 }

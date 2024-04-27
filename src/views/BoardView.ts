@@ -1,7 +1,7 @@
 import { Container, Sprite } from 'pixi.js';
 import anime from 'animejs';
 import { getSpinResult } from '../logic';
-import { Popup } from './Popup';
+import { Popup, PopupType } from './Popup';
 
 export const WINS = [
     {
@@ -61,7 +61,9 @@ export class BoardView extends Container {
 
     private buildPopup(): void {
         this.popup = new Popup();
-        this.popup.on('closeButtonClick', this.closeButtonClick, this);
+        this.popup.on('closePopup', this.closeButtonClick, this);
+        this.popup.visible = false;
+        this.popup.scale.set(0);
         this.addChild(this.popup);
     }
 
@@ -75,6 +77,11 @@ export class BoardView extends Container {
     }
 
     private onSpinClick(): void {
+        if (this.isOver) {
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+            return;
+        }
+
         if (!this.canSpin) return;
         this.canSpin = false;
 
@@ -86,36 +93,24 @@ export class BoardView extends Container {
             easing: 'easeInOutCirc',
             complete: () => {
                 this.wheel.angle = angle;
-                // this.canSpin = true;
 
-                if (win) {
-                    this.showWinPopup();
-                } else {
-                    this.showLosePopup();
-                }
+                this.showPopup(win ? 'win' : 'lose');
             },
         });
     }
 
-    private closeButtonClick(): void {
-        this.hidePopup();
+    private closeButtonClick(type: PopupType): void {
+        if (type === PopupType.Win) {
+            this.isOver = true;
+        }
+
+        const tween = this.popup.hide();
+        tween.complete = () => {
+            this.canSpin = true;
+        };
     }
 
-    private hidePopup(): void {
-        anime({
-            targets: this.popup.scale,
-            x: 0,
-            y: 0,
-            duration: 300,
-            easing: 'easeInOutCubic',
-        });
-    }
-
-    private showWinPopup(): void {
-        //
-    }
-
-    private showLosePopup(): void {
-        //
+    private showPopup(popupType: 'win' | 'lose'): void {
+        this.popup.show(popupType);
     }
 }
