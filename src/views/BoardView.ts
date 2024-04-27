@@ -1,6 +1,7 @@
 import { Container, Sprite } from 'pixi.js';
 import anime from 'animejs';
 import { getSpinResult } from '../logic';
+import { Popup } from './Popup';
 
 export const WINS = [
     {
@@ -25,11 +26,12 @@ export const LOSE_POSITIONS = [0, 90, 180, 270];
 export const WIN_POSITIONS = [-45, -135, -225, -315];
 
 export class BoardView extends Container {
-    private arrow: Sprite;
     private ornament: Sprite;
     private wheel: Sprite;
     private spinButton: Sprite;
     private canSpin = true;
+    private isOver = false;
+    private popup: Popup;
 
     constructor() {
         super();
@@ -37,10 +39,10 @@ export class BoardView extends Container {
     }
 
     private build(): void {
-        this.buildOrnament();
         this.buildWheel();
-        this.buildArrow();
+        this.buildOrnament();
         this.buildSpinButton();
+        this.buildPopup();
     }
 
     private buildOrnament(): void {
@@ -49,24 +51,25 @@ export class BoardView extends Container {
         this.addChild(this.ornament);
     }
 
-    private buildArrow(): void {
-        this.arrow = Sprite.from('arrow.png');
-        this.arrow.anchor.set(0.5);
-        this.arrow.position.set(0, -260);
-        this.addChild(this.arrow);
-    }
-
     private buildWheel(): void {
         this.wheel = Sprite.from('wheel.png');
-        this.wheel.anchor.set(0.5);
-        this.wheel.angle = -315;
+        this.wheel.anchor.set(0.5, 0.5);
+        this.wheel.position.set(0, 12);
+        this.wheel.angle = -45;
         this.addChild(this.wheel);
+    }
+
+    private buildPopup(): void {
+        this.popup = new Popup();
+        this.popup.on('closeButtonClick', this.closeButtonClick, this);
+        this.addChild(this.popup);
     }
 
     private buildSpinButton(): void {
         this.spinButton = Sprite.from('spin_button.png');
         this.spinButton.anchor.set(0.5);
         this.spinButton.eventMode = 'static';
+        this.spinButton.position.set(0, 0);
         this.spinButton.on('pointerup', this.onSpinClick, this);
         this.addChild(this.spinButton);
     }
@@ -74,7 +77,8 @@ export class BoardView extends Container {
     private onSpinClick(): void {
         if (!this.canSpin) return;
         this.canSpin = false;
-        const angle = getSpinResult();
+
+        const { angle, win } = getSpinResult();
         anime({
             targets: this.wheel,
             angle: 360 * 4 + angle,
@@ -82,8 +86,36 @@ export class BoardView extends Container {
             easing: 'easeInOutCirc',
             complete: () => {
                 this.wheel.angle = angle;
-                this.canSpin = true;
+                // this.canSpin = true;
+
+                if (win) {
+                    this.showWinPopup();
+                } else {
+                    this.showLosePopup();
+                }
             },
         });
+    }
+
+    private closeButtonClick(): void {
+        this.hidePopup();
+    }
+
+    private hidePopup(): void {
+        anime({
+            targets: this.popup.scale,
+            x: 0,
+            y: 0,
+            duration: 300,
+            easing: 'easeInOutCubic',
+        });
+    }
+
+    private showWinPopup(): void {
+        //
+    }
+
+    private showLosePopup(): void {
+        //
     }
 }

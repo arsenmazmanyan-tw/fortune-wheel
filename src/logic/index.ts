@@ -3,12 +3,18 @@ import { LOSE_POSITIONS, WIN_POSITIONS } from '../views/BoardView';
 
 let i = 0;
 
-export const getSpinResult = (): any => {
+export const getSpinResult = (): { angle: number; win: boolean } => {
     i++;
 
     if (i % 2) {
-        return sample(LOSE_POSITIONS);
+        return {
+            angle: sample(LOSE_POSITIONS),
+            win: false,
+        };
     } else {
-        return sample(WIN_POSITIONS);
+        return {
+            angle: sample(WIN_POSITIONS),
+            win: true,
+        };
     }
 };
