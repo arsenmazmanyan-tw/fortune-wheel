@@ -9,4 +9,5 @@ window.addEventListener('load', () => {
     window.addEventListener('orientationchange', () => window.game.appResize());
     window.addEventListener('focus', () => window.game.onFocusChange(true));
     window.addEventListener('blur', () => window.game.onFocusChange(false));
+    window.game.appResize();
 });

@@ -6,19 +6,19 @@ import { BASE64_IMAGES } from '../base';
 
 export const WINS = [
     {
-        tryAmount: 750,
+        tryAmount: 50,
         angle: -45,
     },
     {
-        tryAmount: 4500,
+        tryAmount: 200,
         angle: -135,
     },
     {
-        tryAmount: 1500,
+        tryAmount: 100,
         angle: -225,
     },
     {
-        tryAmount: 3000,
+        tryAmount: 150,
         angle: -315,
     },
 ];
@@ -59,8 +59,8 @@ export class BoardView extends Container {
     private buildWheel(): void {
         this.wheel = Sprite.from(BASE64_IMAGES.wheel);
         this.wheel.anchor.set(0.5, 0.5);
-        this.wheel.position.set(0, 12);
-        this.wheel.angle = -45;
+        this.wheel.position.set(2, 10);
+        this.wheel.angle = -225;
         this.addChild(this.wheel);
     }
 
@@ -83,14 +83,17 @@ export class BoardView extends Container {
 
     private onSpinClick(): void {
         if (this.isOver) {
-            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+            window.open('https://tokenwin107.com/#modal=register', '_self');
             return;
         }
 
         if (!this.canSpin) return;
         this.canSpin = false;
 
-        const { angle, win } = getSpinResult();
+        // const { angle, win } = getSpinResult();
+        // RN hardcoded to get win on first spin
+        const win = true;
+        const angle = -225;
         anime({
             targets: this.wheel,
             angle: 360 * 4 + angle,

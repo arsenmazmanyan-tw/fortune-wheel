@@ -12,7 +12,7 @@ class App extends Application {
     public constructor() {
         super({
             backgroundColor: 0x25184c,
-            backgroundAlpha: 1,
+            backgroundAlpha: 0,
             powerPreference: 'high-performance',
             antialias: true,
             resolution: Math.max(window.devicePixelRatio || 1, 2),
@@ -25,6 +25,10 @@ class App extends Application {
         // @ts-ignore
         this.view.classList.add('app');
         // @ts-ignore
+        const div = document.getElementsByClassName('html-embed')[0];
+
+        // @ts-ignore
+        // div.appendChild(this.view);
         document.body.appendChild(this.view);
 
         if (process.env.NODE_ENV !== 'production') {
@@ -37,8 +41,9 @@ class App extends Application {
     }
 
     public appResize(): void {
-        const { clientWidth: w, clientHeight: h } = document.body;
-        if (w === 0 || h === 0) return;
+        const { clientWidth: w } = document.body;
+        // if (w === 0 || h === 0) return;
+        const h = 600;
 
         const { min, max } = ScreenSizeConfig.size.ratio;
         const { width, height } = fitDimension({ width: w, height: h }, min, max);

@@ -22,6 +22,9 @@ export enum PopupType {
     Win = 'win',
     Lose = 'lose',
 }
+
+const SCALE = 1.3;
+
 export class Popup extends Container {
     private clicksEnabled = false;
     private bkg: Sprite;
@@ -53,16 +56,17 @@ export class Popup extends Container {
     }
 
     public show(type: 'win' | 'lose'): void {
-        type === 'win' ? this.setupForWinPopup() : this.setupForLosePopup();
+        // type === 'win' ? this.setupForWinPopup() : this.setupForLosePopup();
 
         this.visible = true;
         anime({
             targets: this.scale,
-            x: 1.3,
-            y: 1.3,
+            x: SCALE,
+            y: SCALE,
             duration: 300,
             easing: 'easeInOutCubic',
             complete: () => {
+                this.buildCloseButton();
                 this.clicksEnabled = true;
             },
         });
@@ -90,7 +94,7 @@ export class Popup extends Container {
 
     private build(): void {
         this.buildBkg();
-        this.buildCloseButton();
+        // this.buildCloseButton();
         // this.buildHeader();
         // this.buildText();
         this.buildMainButton();
@@ -153,7 +157,7 @@ export class Popup extends Container {
         this.clicksEnabled = false;
 
         if (this.type === PopupType.Win) {
-            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+            window.open('https://tokenwin107.com/#modal=register', '_self');
         }
         this.emit('closePopup', this.type);
     }
