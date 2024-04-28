@@ -1,20 +1,21 @@
 import { Container, Graphics, Sprite, Text, Texture } from 'pixi.js';
 import anime from 'animejs';
+import { BASE64_IMAGES } from '../base';
 
 const WIN_POPUP = Object.freeze({
     header: 'Congratulations!',
     message: 'You just won 100 freespins with up to 15,000\nJPY for Sevens&Fruits game by Playson!',
     buttonText: 'Claim!',
-    popupTexture: 'win_popup.png',
-    buttonTexture: 'claim.png',
+    popupTexture: BASE64_IMAGES.winPopup,
+    buttonTexture: BASE64_IMAGES.claim,
 });
 
 const LOSE_POPUP = Object.freeze({
     header: "Whoops! That didn't land right!",
     message: "That's OK, though! There's always next time.",
     buttonText: 'Spin Again!',
-    popupTexture: 'lose_popup.png',
-    buttonTexture: 'spin_again.png',
+    popupTexture: BASE64_IMAGES.losePopup,
+    buttonTexture: BASE64_IMAGES.spinAgain,
 });
 
 export enum PopupType {
@@ -57,8 +58,8 @@ export class Popup extends Container {
         this.visible = true;
         anime({
             targets: this.scale,
-            x: 1,
-            y: 1,
+            x: 1.3,
+            y: 1.3,
             duration: 300,
             easing: 'easeInOutCubic',
             complete: () => {
@@ -96,13 +97,13 @@ export class Popup extends Container {
     }
 
     private buildBkg(): void {
-        this.bkg = Sprite.from('win_popup.png');
+        this.bkg = Sprite.from(BASE64_IMAGES.winPopup);
         this.bkg.anchor.set(0.5);
         this.addChild(this.bkg);
     }
 
     private buildCloseButton(): void {
-        this.closeButton = Sprite.from('close_button.png');
+        this.closeButton = Sprite.from(BASE64_IMAGES.closeButton);
         this.closeButton.anchor.set(0.5);
         this.closeButton.position.set(this.bkg.width / 2 - 35, -this.bkg.height / 2 + 35);
         this.closeButton.eventMode = 'static';
@@ -133,7 +134,7 @@ export class Popup extends Container {
     }
 
     private buildMainButton(): void {
-        this.mainButton = Sprite.from('claim.png');
+        this.mainButton = Sprite.from(BASE64_IMAGES.claim);
         this.mainButton.anchor.set(0.5);
         this.mainButton.position.set(0, 60);
         this.mainButton.eventMode = 'static';

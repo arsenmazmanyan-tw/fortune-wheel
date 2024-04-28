@@ -1,7 +1,8 @@
-import { Container, Sprite } from 'pixi.js';
+import { Container, Graphics, Rectangle, Sprite } from 'pixi.js';
 import anime from 'animejs';
 import { getSpinResult } from '../logic';
 import { Popup, PopupType } from './Popup';
+import { BASE64_IMAGES } from '../base';
 
 export const WINS = [
     {
@@ -38,6 +39,10 @@ export class BoardView extends Container {
         this.build();
     }
 
+    public getBounds(): Rectangle {
+        return new Rectangle(-360, -360, 720, 720);
+    }
+
     private build(): void {
         this.buildWheel();
         this.buildOrnament();
@@ -46,13 +51,13 @@ export class BoardView extends Container {
     }
 
     private buildOrnament(): void {
-        this.ornament = Sprite.from('ornament.png');
+        this.ornament = Sprite.from(BASE64_IMAGES.ornament);
         this.ornament.anchor.set(0.5);
         this.addChild(this.ornament);
     }
 
     private buildWheel(): void {
-        this.wheel = Sprite.from('wheel.png');
+        this.wheel = Sprite.from(BASE64_IMAGES.wheel);
         this.wheel.anchor.set(0.5, 0.5);
         this.wheel.position.set(0, 12);
         this.wheel.angle = -45;
@@ -68,7 +73,7 @@ export class BoardView extends Container {
     }
 
     private buildSpinButton(): void {
-        this.spinButton = Sprite.from('spin_button.png');
+        this.spinButton = Sprite.from(BASE64_IMAGES.spinButton);
         this.spinButton.anchor.set(0.5);
         this.spinButton.eventMode = 'static';
         this.spinButton.position.set(0, 0);
