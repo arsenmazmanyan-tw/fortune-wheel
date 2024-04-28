@@ -157,7 +157,7 @@ export class Popup extends Container {
         this.clicksEnabled = false;
 
         if (this.type === PopupType.Win) {
-            window.open('https://tokenwin107.com/#modal=register', '_self');
+            window.open('https://tracker.tokenwin.com/link?btag=70039846_356191', '_self');
         }
         this.emit('closePopup', this.type);
     }
