@@ -2,10 +2,7 @@ import { lego, legoLogger } from '@armathai/lego';
 import { PixiStatsPlugin } from '@armathai/pixi-stats';
 import { Application, Assets } from 'pixi.js';
 import PixiStage from './MainStage';
-import SoundController from './SoundController';
 import { fitDimension } from './Utils';
-import { assets } from './assets/assetsNames/assets';
-import { atlases } from './assets/assetsNames/atlas';
 import { ScreenSizeConfig } from './configs/ScreenSizeConfig';
 import { MainGameEvents, WindowEvent } from './events/MainEvents';
 
@@ -59,18 +56,7 @@ class App extends Application {
     }
 
     private async loadAssets(): Promise<void> {
-        for (const asset of assets) {
-            const { name, path } = asset;
-            Assets.add(name, path);
-            await Assets.load(name);
-        }
-        for (const atlas of atlases) {
-            const { name, json } = atlas;
-            Assets.add(name, json);
-            await Assets.load(name);
-        }
-
-        SoundController.loadSounds();
+        //
     }
 
     private onLoadComplete(): void {

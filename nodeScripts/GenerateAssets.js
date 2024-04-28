@@ -13,10 +13,6 @@ const paths = {
         path: join(assetsPath, 'images'),
         name: 'images',
     },
-    audio: {
-        path: join(assetsPath, 'audio'),
-        name: 'audio',
-    },
     uncompressed: {
         path: join(assetsPath, 'uncompressed'),
         name: 'uncompressed',
@@ -190,26 +186,6 @@ async function generateUncompressedSprites() {
     }
 }
 
-async function generateAudioAssets() {
-    const { path } = paths.audio;
-    try {
-        const files = await getFolderContent(path, true);
-        let filesNamesAndPath = [];
-        if (files.length !== 0) {
-            filesNamesAndPath = files.map((el) => {
-                const name = getFileNameWithoutExtension(el);
-                return { name, path: el };
-            });
-        }
-        const file = join(assetsPath, 'assetsNames/audio.ts');
-        const data = `export const audioAssets: AssetNameAndPath[] = ${JSON.stringify(filesNamesAndPath)}`;
-        await fs.writeFile(file, data);
-        await runPrettierOn(file);
-    } catch (e) {
-        console.log(e.message);
-    }
-}
-
 async function start() {
     console.log('removing current sprite sheets');
     await emptyAtlasFolder();
@@ -217,8 +193,6 @@ async function start() {
     await generateAtlases();
     console.log('generating uncompressed sprites');
     await generateUncompressedSprites();
-    console.log('generating audio assets');
-    await generateAudioAssets();
     console.log('asset generation complete');
     console.log('running the game');
 }
