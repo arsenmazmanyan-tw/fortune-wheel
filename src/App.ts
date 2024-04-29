@@ -28,8 +28,8 @@ class App extends Application {
         const div = document.getElementsByClassName('html-embed')[0];
 
         // @ts-ignore
-        // div.appendChild(this.view);
-        document.body.appendChild(this.view);
+        div.appendChild(this.view);
+        // document.body.appendChild(this.view);
 
         if (process.env.NODE_ENV !== 'production') {
             globalThis.__PIXI_APP__ = this;

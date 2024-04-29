@@ -1,6 +1,7 @@
-import { Container, Graphics, Sprite, Text, Texture } from 'pixi.js';
+import { Container, Graphics, Rectangle, Sprite, Text, Texture } from 'pixi.js';
 import anime from 'animejs';
 import { BASE64_IMAGES } from '../base';
+import { openAffiliatePage } from '../Utils';
 
 const WIN_POPUP = Object.freeze({
     header: 'Congratulations!',
@@ -14,40 +15,37 @@ const LOSE_POPUP = Object.freeze({
     header: "Whoops! That didn't land right!",
     message: "That's OK, though! There's always next time.",
     buttonText: 'Spin Again!',
-    popupTexture: BASE64_IMAGES.losePopup,
+    popupTexture: BASE64_IMAGES.winPopup,
     buttonTexture: BASE64_IMAGES.spinAgain,
 });
 
-export enum PopupType {
-    Win = 'win',
-    Lose = 'lose',
-}
-
 const SCALE = 1.3;
 
-export class Popup extends Container {
-    private clicksEnabled = false;
-    private bkg: Sprite;
-    private header: Text;
-    private message: Text;
-    private closeButton: Sprite;
-    private mainButton: Sprite;
+const WIDTH = 350;
+const HEIGHT = 456;
 
-    private _type: PopupType = PopupType.Win;
+export class Popup extends Container {
+    private wrapper: Container;
+    private clicksEnabled = false;
+    private claimButton: Sprite;
+    private content: Sprite;
 
     constructor() {
         super();
         this.build();
+
+        this.wrapper.visible = false;
+        this.wrapper.scale.set(0);
     }
 
-    get type(): PopupType {
-        return this._type;
+    public getBounds(): Rectangle {
+        return new Rectangle(-WIDTH / 2, -HEIGHT / 2, WIDTH, HEIGHT);
     }
 
     public hide(): any {
         this.clicksEnabled = false;
         return anime({
-            targets: this.scale,
+            targets: this.wrapper.scale,
             x: 0,
             y: 0,
             duration: 300,
@@ -55,110 +53,51 @@ export class Popup extends Container {
         });
     }
 
-    public show(type: 'win' | 'lose'): void {
-        // type === 'win' ? this.setupForWinPopup() : this.setupForLosePopup();
-
-        this.visible = true;
+    public show(): void {
+        this.wrapper.visible = true;
         anime({
-            targets: this.scale,
+            targets: this.wrapper.scale,
             x: SCALE,
             y: SCALE,
             duration: 300,
             easing: 'easeInOutCubic',
             complete: () => {
-                this.buildCloseButton();
                 this.clicksEnabled = true;
             },
         });
     }
 
-    public setupForWinPopup(): void {
-        this._type = PopupType.Win;
-
-        // this.header.text = WIN_POPUP.header;
-        // this.message.text = WIN_POPUP.message;
-
-        this.mainButton.texture = Texture.from(WIN_POPUP.buttonTexture);
-        this.mainButton.position.set(0, 60);
-        this.bkg.texture = Texture.from(WIN_POPUP.popupTexture);
-    }
-
-    public setupForLosePopup(): void {
-        this._type = PopupType.Lose;
-        // this.header.text = LOSE_POPUP.header;
-        // this.message.text = LOSE_POPUP.message;
-        this.mainButton.texture = Texture.from(LOSE_POPUP.buttonTexture);
-        this.mainButton.position.set(0, 50);
-        this.bkg.texture = Texture.from(LOSE_POPUP.popupTexture);
-    }
-
     private build(): void {
-        this.buildBkg();
-        // this.buildCloseButton();
-        // this.buildHeader();
-        // this.buildText();
-        this.buildMainButton();
+        this.buildWrapper();
+        this.buildContent();
+        this.buildClaimButton();
     }
 
-    private buildBkg(): void {
-        this.bkg = Sprite.from(BASE64_IMAGES.winPopup);
-        this.bkg.anchor.set(0.5);
-        this.addChild(this.bkg);
+    private buildWrapper(): void {
+        this.wrapper = new Container();
+        this.addChild(this.wrapper);
     }
 
-    private buildCloseButton(): void {
-        this.closeButton = Sprite.from(BASE64_IMAGES.closeButton);
-        this.closeButton.anchor.set(0.5);
-        this.closeButton.position.set(this.bkg.width / 2 - 35, -this.bkg.height / 2 + 35);
-        this.closeButton.eventMode = 'static';
-        this.closeButton.on('pointerup', this.onCloseButtonClick, this);
-        this.addChild(this.closeButton);
+    private buildContent(): void {
+        this.content = Sprite.from(BASE64_IMAGES.winPopupContent);
+        this.content.anchor.set(0.5, 0);
+        this.content.position.set(0, -this.height / 2);
+        this.wrapper.addChild(this.content);
     }
 
-    private buildHeader(): void {
-        this.header = new Text(WIN_POPUP.header, {
-            fill: 0xffffff,
-            fontSize: 24,
-        });
-
-        this.header.anchor.set(0.5);
-        this.header.position.set(0, -65);
-        this.addChild(this.header);
-    }
-
-    private buildText(): void {
-        this.message = new Text(WIN_POPUP.message, {
-            fill: 0x999999,
-            fontSize: 16,
-        });
-
-        this.message.anchor.set(0.5);
-        this.message.position.set(0, -15);
-        this.addChild(this.message);
-    }
-
-    private buildMainButton(): void {
-        this.mainButton = Sprite.from(BASE64_IMAGES.claim);
-        this.mainButton.anchor.set(0.5);
-        this.mainButton.position.set(0, 60);
-        this.mainButton.eventMode = 'static';
-        this.mainButton.on('pointerup', this.onMainButtonClick, this);
-        this.addChild(this.mainButton);
-    }
-
-    private onCloseButtonClick(): void {
-        if (!this.clicksEnabled) return;
-        this.clicksEnabled = false;
-        this.emit('closePopup', this.type);
+    private buildClaimButton(): void {
+        this.claimButton = Sprite.from(BASE64_IMAGES.claim);
+        this.claimButton.anchor.set(0.5);
+        this.claimButton.position.set(0, 160);
+        this.claimButton.eventMode = 'static';
+        this.claimButton.on('pointerup', this.onMainButtonClick, this);
+        this.wrapper.addChild(this.claimButton);
     }
 
     private onMainButtonClick(): void {
         if (!this.clicksEnabled) return;
         this.clicksEnabled = false;
 
-        if (this.type === PopupType.Win) {
-            window.open('https://tracker.tokenwin.com/link?btag=70039846_356191', '_self');
-        }
-        this.emit('closePopup', this.type);
+        openAffiliatePage();
     }
 }

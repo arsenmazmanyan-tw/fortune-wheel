@@ -77,3 +77,11 @@ export const randomInt = (min, max) => {
     const ma = Math.floor(max);
     return Math.floor(Math.random() * (ma - mi + 1)) + mi;
 };
+
+export const openAffiliatePage = (): void => {
+    const element = document.getElementsByClassName('html-embed')[0];
+    // @ts-ignore
+    const url = element.dataset.url;
+
+    window.open(url, '_self');
+};

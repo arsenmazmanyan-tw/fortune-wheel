@@ -1,4 +1,4 @@
-import { CellScale } from '@armathai/pixi-grid';
+import { CellAlign, CellScale } from '@armathai/pixi-grid';
 import { lp } from '../../Utils';
 
 export const getGameViewGridConfig = () => {
@@ -17,6 +17,17 @@ const getGameViewGridLandscapeConfig = () => {
                 scale: CellScale.fit,
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
+            {
+                name: 'popup',
+                scale: CellScale.fit,
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+            },
+            {
+                name: 'blocker',
+                scale: CellScale.envelop,
+                align: CellAlign.rightTop,
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+            },
         ],
     };
 };
@@ -30,6 +41,17 @@ const getGameViewGridPortraitConfig = () => {
         cells: [
             {
                 name: 'board',
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+            },
+            {
+                name: 'popup',
+                scale: CellScale.fit,
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+            },
+            {
+                name: 'blocker',
+                scale: CellScale.envelop,
+                align: CellAlign.rightTop,
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
         ],

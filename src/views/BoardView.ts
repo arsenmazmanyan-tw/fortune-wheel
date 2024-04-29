@@ -1,8 +1,7 @@
-import { Container, Graphics, Rectangle, Sprite } from 'pixi.js';
+import { Container, Rectangle, Sprite } from 'pixi.js';
 import anime from 'animejs';
-import { getSpinResult } from '../logic';
-import { Popup, PopupType } from './Popup';
 import { BASE64_IMAGES } from '../base';
+import { openAffiliatePage } from '../Utils';
 
 export const WINS = [
     {
@@ -32,7 +31,6 @@ export class BoardView extends Container {
     private spinButton: Sprite;
     private canSpin = true;
     private isOver = false;
-    private popup: Popup;
 
     constructor() {
         super();
@@ -47,7 +45,6 @@ export class BoardView extends Container {
         this.buildWheel();
         this.buildOrnament();
         this.buildSpinButton();
-        this.buildPopup();
     }
 
     private buildOrnament(): void {
@@ -64,14 +61,6 @@ export class BoardView extends Container {
         this.addChild(this.wheel);
     }
 
-    private buildPopup(): void {
-        this.popup = new Popup();
-        this.popup.on('closePopup', this.closeButtonClick, this);
-        this.popup.visible = false;
-        this.popup.scale.set(0);
-        this.addChild(this.popup);
-    }
-
     private buildSpinButton(): void {
         this.spinButton = Sprite.from(BASE64_IMAGES.spinButton);
         this.spinButton.anchor.set(0.5);
@@ -83,7 +72,7 @@ export class BoardView extends Container {
 
     private onSpinClick(): void {
         if (this.isOver) {
-            window.open('https://tokenwin107.com/#modal=register', '_self');
+            openAffiliatePage();
             return;
         }
 
@@ -92,7 +81,7 @@ export class BoardView extends Container {
 
         // const { angle, win } = getSpinResult();
         // RN hardcoded to get win on first spin
-        const win = true;
+        // const win = true;
         const angle = -225;
         anime({
             targets: this.wheel,
@@ -102,23 +91,8 @@ export class BoardView extends Container {
             complete: () => {
                 this.wheel.angle = angle;
 
-                this.showPopup(win ? 'win' : 'lose');
+                this.emit('showPopup');
             },
         });
-    }
-
-    private closeButtonClick(type: PopupType): void {
-        if (type === PopupType.Win) {
-            this.isOver = true;
-        }
-
-        const tween = this.popup.hide();
-        tween.complete = () => {
-            this.canSpin = true;
-        };
-    }
-
-    private showPopup(popupType: 'win' | 'lose'): void {
-        this.popup.show(popupType);
     }
 }
