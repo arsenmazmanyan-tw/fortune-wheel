@@ -1,22 +1,12 @@
 import { Container, Graphics, Rectangle, Sprite, Text, Texture } from 'pixi.js';
 import anime from 'animejs';
-import { BASE64_IMAGES } from '../base';
+import { BASE64_IMAGES } from '../Images';
 import { openAffiliatePage } from '../Utils';
 
 const WIN_POPUP = Object.freeze({
     header: 'Congratulations!',
     message: 'You just won 100 freespins with up to 15,000\nJPY for Sevens&Fruits game by Playson!',
     buttonText: 'Claim!',
-    popupTexture: BASE64_IMAGES.winPopup,
-    buttonTexture: BASE64_IMAGES.claim,
-});
-
-const LOSE_POPUP = Object.freeze({
-    header: "Whoops! That didn't land right!",
-    message: "That's OK, though! There's always next time.",
-    buttonText: 'Spin Again!',
-    popupTexture: BASE64_IMAGES.winPopup,
-    buttonTexture: BASE64_IMAGES.spinAgain,
 });
 
 const SCALE = 1.3;
@@ -79,19 +69,19 @@ export class Popup extends Container {
     }
 
     private buildContent(): void {
-        this.content = Sprite.from(BASE64_IMAGES.winPopupContent);
-        this.content.anchor.set(0.5, 0);
-        this.content.position.set(0, -this.height / 2);
-        this.wrapper.addChild(this.content);
+        // this.content = Sprite.from(BASE64_IMAGES.winPopupContent);
+        // this.content.anchor.set(0.5, 0);
+        // this.content.position.set(0, -this.height / 2);
+        // this.wrapper.addChild(this.content);
     }
 
     private buildClaimButton(): void {
-        this.claimButton = Sprite.from(BASE64_IMAGES.claim);
-        this.claimButton.anchor.set(0.5);
-        this.claimButton.position.set(0, 160);
-        this.claimButton.eventMode = 'static';
-        this.claimButton.on('pointerup', this.onMainButtonClick, this);
-        this.wrapper.addChild(this.claimButton);
+        // this.claimButton = Sprite.from(BASE64_IMAGES.claim);
+        // this.claimButton.anchor.set(0.5);
+        // this.claimButton.position.set(0, 160);
+        // this.claimButton.eventMode = 'static';
+        // this.claimButton.on('pointerup', this.onMainButtonClick, this);
+        // this.wrapper.addChild(this.claimButton);
     }
 
     private onMainButtonClick(): void {

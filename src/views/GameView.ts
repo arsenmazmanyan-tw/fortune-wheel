@@ -4,7 +4,7 @@ import { getGameViewGridConfig } from '../configs/gridConfigs/GameViewGC';
 import { BoardView } from './BoardView';
 import { Popup } from './Popup';
 import { Sprite } from 'pixi.js';
-import { BASE64_IMAGES } from '../base';
+import { BASE64_IMAGES } from '../Images';
 
 export class GameView extends PixiGrid {
     private popup: Popup;

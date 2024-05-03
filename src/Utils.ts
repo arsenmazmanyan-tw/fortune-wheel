@@ -85,3 +85,17 @@ export const openAffiliatePage = (): void => {
 
     window.open(url, '_self');
 };
+
+export const getLanguage = (): string => {
+    const element = document.getElementsByClassName('html-embed')[0];
+    // @ts-ignore
+    const webLang = element.dataset.lang;
+
+    const langs = ['en', 'ja', 'pt-br', 'zh', 'ko', 'tr'];
+
+    if (langs.includes(webLang)) {
+        return webLang;
+    } else {
+        return 'en';
+    }
+};
