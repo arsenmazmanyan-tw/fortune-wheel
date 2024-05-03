@@ -32,12 +32,14 @@ export class GameView extends PixiGrid {
 
     private buildBoard(): void {
         this.board = new BoardView();
-        this.board.on('showPopup', this.showPopup, this);
+        this.board.on('showPopup', () => {
+            this.popup.show();
+            this.showBlocker();
+        });
         this.setChild('board', this.board);
     }
 
-    private showPopup(): void {
-        this.popup.show();
+    private showBlocker(): void {
         anime({
             targets: this.blocker,
             alpha: 0.975,

@@ -1,4 +1,4 @@
-import { Container, Graphics } from 'pixi.js';
+import { Container, Graphics, Text } from 'pixi.js';
 
 export const lp = (l, p) => {
     const { clientWidth: w, clientHeight: h } = document.body;
@@ -98,4 +98,9 @@ export const getLanguage = (): string => {
     } else {
         return 'en';
     }
+};
+
+export const fitText = (text: Text, width: number): void => {
+    if (text.width < width) return;
+    text.scale.set(width / text.width);
 };

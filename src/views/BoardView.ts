@@ -58,7 +58,6 @@ export class BoardView extends Container {
 
         this.wheel.anchor.set(0.5, 0.5);
         this.wheel.position.set(2, 10);
-        this.wheel.angle = -225;
         this.addChild(this.wheel);
     }
 
@@ -83,7 +82,7 @@ export class BoardView extends Container {
         // const { angle, win } = getSpinResult();
         // RN hardcoded to get win on first spin
         // const win = true;
-        const angle = -225;
+        const angle = -135;
         anime({
             targets: this.wheel,
             angle: 360 * 4 + angle,
