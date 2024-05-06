@@ -7,13 +7,13 @@ export const TEXTS = {
     },
     ja: {
         congratulations: 'おめでとう!',
-        content: 'あなたはプレイソンの「Sevens&Fruits」ゲームで\n100フリースピンと最大15,000円を獲得しました!',
+        content: 'あなたはプレイソンの「Sevens&Fruits」ゲームで\n200フリースピンと最大200USDTを獲得しました!',
         clickBelowToClaim: '以下をクリックして受け取ってください!',
         claim: '請求! 🎉',
     },
     tr: {
         congratulations: 'Tebrikler!',
-        content: "Playson'un Sevens&Fruits oyunu için 4500 TL'ye\nkadar 200 free spin kazandınız!",
+        content: "Playson'un Sevens&Fruits oyunu için 200 USDT'ye\nkadar 200 free spin kazandınız!",
         clickBelowToClaim: 'Talep etmek için aşağıdaki butona tıklayın!',
         claim: 'İddia! 🎉',
     },
@@ -25,7 +25,7 @@ export const TEXTS = {
     },
     zh: {
         congratulations: '恭喜你!',
-        content: '您在 Playson 的 Sevens&Fruits 游戏中赢取了\n200次免费旋转机会，最高可赢取为200USDT！',
+        content: '您在 Playson 的 Sevens&Fruits 游戏中赢取了\n200次免费旋转机会，最高可赢取为200USDT!',
         clickBelowToClaim: '点击下方领取！',
         claim: '宣称! 🎉',
     },

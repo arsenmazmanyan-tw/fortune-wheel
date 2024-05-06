@@ -12,7 +12,7 @@ const WIN_POPUP = Object.freeze({
 
 const SCALE = 1.3;
 
-const WIDTH = 350;
+const WIDTH = 380;
 const HEIGHT = 456;
 
 export class Popup extends Container {
@@ -89,17 +89,28 @@ export class Popup extends Container {
         fitText(congrats, WIDTH);
         this.wrapper.addChild(congrats);
 
-        const content = new Text(TEXTS[getLanguage()].content, {
+        const winningInfo = new Text(TEXTS[getLanguage()].content, {
             fill: 0xcecece,
-            fontSize: 24,
+            fontSize: 26,
             fontWeight: '400',
             lineHeight: 34,
             align: 'center',
         });
-        content.anchor.set(0.5);
-        content.position.set(0, 20);
-        fitText(content, WIDTH);
-        this.wrapper.addChild(content);
+        winningInfo.anchor.set(0.5);
+        winningInfo.position.set(0, 10);
+        fitText(winningInfo, WIDTH);
+        this.wrapper.addChild(winningInfo);
+
+        const clickToClaim = new Text(TEXTS[getLanguage()].clickBelowToClaim, {
+            fill: 0xcecece,
+            fontSize: 16,
+            fontWeight: '400',
+            align: 'center',
+        });
+        clickToClaim.anchor.set(0.5);
+        clickToClaim.position.set(0, 76);
+        fitText(clickToClaim, WIDTH);
+        this.wrapper.addChild(clickToClaim);
     }
 
     private buildClaimButton(): void {
@@ -114,7 +125,7 @@ export class Popup extends Container {
             fill: 0xffffff,
             fontSize: 24,
             fontWeight: '400',
-            lineHeight: 34,
+            lineHeight: 38,
             align: 'center',
         });
         claimText.anchor.set(0.5);

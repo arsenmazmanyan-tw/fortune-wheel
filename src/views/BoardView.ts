@@ -57,7 +57,7 @@ export class BoardView extends Container {
         this.wheel = Sprite.from(BASE64_IMAGES[getLanguage()].wheel);
 
         this.wheel.anchor.set(0.5, 0.5);
-        this.wheel.position.set(2, 10);
+        this.wheel.position.set(0, 12);
         this.addChild(this.wheel);
     }
 
@@ -65,7 +65,7 @@ export class BoardView extends Container {
         this.spinButton = Sprite.from(BASE64_IMAGES[getLanguage()].spinButton);
         this.spinButton.anchor.set(0.5);
         this.spinButton.eventMode = 'static';
-        this.spinButton.position.set(0, 0);
+        this.spinButton.position.set(7, 8);
         this.spinButton.on('pointerup', this.onSpinClick, this);
         this.addChild(this.spinButton);
     }
