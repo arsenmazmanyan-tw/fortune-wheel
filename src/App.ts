@@ -63,10 +63,10 @@ class App extends Application {
 
     private async loadAssets(): Promise<void> {
         IMAGES.wheel = await Assets.load(
-            `https://storage.googleapis.com/prd-tokenwin-advert-images/banner_uploads/wheel/wheel_${getImageLanguage()}.png`,
+            `https://pub-5e90f92420514692a46e74a3bd609a71.r2.dev/wheel_${getImageLanguage()}.png`,
         );
         IMAGES.spinButton = await Assets.load(
-            `https://storage.googleapis.com/prd-tokenwin-advert-images/banner_uploads/wheel/spin_button_${getImageLanguage()}.png`,
+            `https://pub-5e90f92420514692a46e74a3bd609a71.r2.dev/spin_button_${getImageLanguage()}.png`,
         );
     }
 
