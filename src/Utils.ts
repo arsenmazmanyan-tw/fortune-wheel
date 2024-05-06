@@ -86,7 +86,30 @@ export const openAffiliatePage = (): void => {
     window.open(url, '_self');
 };
 
-export const getLanguage = (): string => {
+export const getImageLanguage = (): string => {
+    const element = document.getElementsByClassName('html-embed')[0];
+    // @ts-ignore
+    const webLang = element.dataset.lang;
+
+    // const langs = ['en', 'ja', 'pt-br', 'zh', 'ko', 'tr'];
+
+    switch (webLang) {
+        case 'ja':
+        case 'ko':
+            return webLang;
+        case 'pt-br':
+            return 'po';
+        case 'zh':
+            return 'ch';
+        case 'tr':
+            return 'tu';
+
+        default:
+            return 'en';
+    }
+};
+
+export const getTextLanguage = (): string => {
     const element = document.getElementsByClassName('html-embed')[0];
     // @ts-ignore
     const webLang = element.dataset.lang;

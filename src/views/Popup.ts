@@ -1,14 +1,8 @@
 import { Container, Graphics, Rectangle, Sprite, Text, Texture } from 'pixi.js';
 import anime from 'animejs';
 import { BASE64_IMAGES } from '../Images';
-import { fitText, getLanguage, openAffiliatePage } from '../Utils';
+import { fitText, getTextLanguage, openAffiliatePage } from '../Utils';
 import { TEXTS } from '../configs/Texts';
-
-const WIN_POPUP = Object.freeze({
-    header: 'Congratulations!',
-    message: 'You just won 100 freespins with up to 15,000\nJPY for Sevens&Fruits game by Playson!',
-    buttonText: 'Claim!',
-});
 
 const SCALE = 1.3;
 
@@ -79,7 +73,7 @@ export class Popup extends Container {
     }
 
     private buildTexts(): void {
-        const congrats = new Text(TEXTS[getLanguage()].congratulations, {
+        const congrats = new Text(TEXTS[getTextLanguage()].congratulations, {
             fill: 0xffffff,
             fontSize: 36,
             fontWeight: '900',
@@ -89,7 +83,7 @@ export class Popup extends Container {
         fitText(congrats, WIDTH);
         this.wrapper.addChild(congrats);
 
-        const winningInfo = new Text(TEXTS[getLanguage()].content, {
+        const winningInfo = new Text(TEXTS[getTextLanguage()].content, {
             fill: 0xcecece,
             fontSize: 26,
             fontWeight: '400',
@@ -101,7 +95,7 @@ export class Popup extends Container {
         fitText(winningInfo, WIDTH);
         this.wrapper.addChild(winningInfo);
 
-        const clickToClaim = new Text(TEXTS[getLanguage()].clickBelowToClaim, {
+        const clickToClaim = new Text(TEXTS[getTextLanguage()].clickBelowToClaim, {
             fill: 0xcecece,
             fontSize: 16,
             fontWeight: '400',
@@ -121,7 +115,7 @@ export class Popup extends Container {
         this.claimButton.on('pointerup', this.onMainButtonClick, this);
         this.wrapper.addChild(this.claimButton);
 
-        const claimText = new Text(TEXTS[getLanguage()].claim, {
+        const claimText = new Text(TEXTS[getTextLanguage()].claim, {
             fill: 0xffffff,
             fontSize: 24,
             fontWeight: '400',

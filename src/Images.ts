@@ -1,9 +1,9 @@
+import { SpriteSource } from 'pixi.js';
 import { blocker } from './images64/BlockerImage';
 import { checkmark } from './images64/CheckImage';
 import { greenButton } from './images64/GreenButton';
 import { ornament } from './images64/OrnamentImage';
 import { EN } from './images64/en';
-import { JA } from './images64/ja';
 import { KO } from './images64/ko';
 import { PTBR } from './images64/pt-br';
 import { TR } from './images64/tr';
@@ -12,8 +12,6 @@ import { ZH } from './images64/zh';
 export const BASE64_IMAGES = {
     // English
     en: EN,
-    // Japanese
-    ja: JA,
     // Korean
     ko: KO,
     // Portugese-Brazil
@@ -29,3 +27,5 @@ export const BASE64_IMAGES = {
     checkmark,
     greenButton,
 };
+
+export const IMAGES: any = {};

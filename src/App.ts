@@ -2,9 +2,10 @@ import { lego, legoLogger } from '@armathai/lego';
 import { PixiStatsPlugin } from '@armathai/pixi-stats';
 import { Application, Assets } from 'pixi.js';
 import PixiStage from './MainStage';
-import { fitDimension } from './Utils';
+import { fitDimension, getImageLanguage } from './Utils';
 import { ScreenSizeConfig } from './configs/ScreenSizeConfig';
 import { MainGameEvents, WindowEvent } from './events/MainEvents';
+import { IMAGES } from './Images';
 
 class App extends Application {
     public stage: PixiStage;
@@ -61,7 +62,12 @@ class App extends Application {
     }
 
     private async loadAssets(): Promise<void> {
-        //
+        IMAGES.wheel = await Assets.load(
+            `https://storage.googleapis.com/prd-tokenwin-advert-images/banner_uploads/wheel/wheel_${getImageLanguage()}.png`,
+        );
+        IMAGES.spinButton = await Assets.load(
+            `https://storage.googleapis.com/prd-tokenwin-advert-images/banner_uploads/wheel/spin_button_${getImageLanguage()}.png`,
+        );
     }
 
     private onLoadComplete(): void {

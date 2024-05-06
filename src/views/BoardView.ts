@@ -1,7 +1,7 @@
-import { Container, Rectangle, Sprite } from 'pixi.js';
+import { Container, Rectangle, Sprite, SpriteSource } from 'pixi.js';
 import anime from 'animejs';
-import { BASE64_IMAGES } from '../Images';
-import { getLanguage, openAffiliatePage } from '../Utils';
+import { BASE64_IMAGES, IMAGES } from '../Images';
+import { openAffiliatePage } from '../Utils';
 
 export const WINS = [
     {
@@ -54,7 +54,7 @@ export class BoardView extends Container {
     }
 
     private buildWheel(): void {
-        this.wheel = Sprite.from(BASE64_IMAGES[getLanguage()].wheel);
+        this.wheel = Sprite.from(IMAGES.wheel);
 
         this.wheel.anchor.set(0.5, 0.5);
         this.wheel.position.set(0, 12);
@@ -62,7 +62,7 @@ export class BoardView extends Container {
     }
 
     private buildSpinButton(): void {
-        this.spinButton = Sprite.from(BASE64_IMAGES[getLanguage()].spinButton);
+        this.spinButton = Sprite.from(IMAGES.spinButton);
         this.spinButton.anchor.set(0.5);
         this.spinButton.eventMode = 'static';
         this.spinButton.position.set(7, 8);
