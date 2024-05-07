@@ -4,13 +4,11 @@ import { BASE64_IMAGES } from '../Images';
 import { fitText, getTextLanguage, openAffiliatePage } from '../Utils';
 import { TEXTS } from '../configs/Texts';
 
-const SCALE = 1.3;
-
-const WIDTH = 380;
-const HEIGHT = 456;
+const WIDTH = 794;
+const HEIGHT = 600;
 
 export class Popup extends Container {
-    private wrapper: Container;
+    private bkg: Sprite;
     private clicksEnabled = false;
     private claimButton: Sprite;
     private checkmark: Sprite;
@@ -18,9 +16,6 @@ export class Popup extends Container {
     constructor() {
         super();
         this.build();
-
-        this.wrapper.visible = false;
-        this.wrapper.scale.set(0);
     }
 
     public getBounds(): Rectangle {
@@ -30,7 +25,7 @@ export class Popup extends Container {
     public hide(): any {
         this.clicksEnabled = false;
         return anime({
-            targets: this.wrapper.scale,
+            targets: this.scale,
             x: 0,
             y: 0,
             duration: 300,
@@ -39,11 +34,11 @@ export class Popup extends Container {
     }
 
     public show(): void {
-        this.wrapper.visible = true;
+        this.visible = true;
         anime({
-            targets: this.wrapper.scale,
-            x: SCALE,
-            y: SCALE,
+            targets: this.scale,
+            x: 1,
+            y: 1,
             duration: 300,
             easing: 'easeInOutCubic',
             complete: () => {
@@ -53,15 +48,16 @@ export class Popup extends Container {
     }
 
     private build(): void {
-        this.buildWrapper();
+        this.buildBkg();
         this.buildCheckmark();
         this.buildTexts();
         this.buildClaimButton();
     }
 
-    private buildWrapper(): void {
-        this.wrapper = new Container();
-        this.addChild(this.wrapper);
+    private buildBkg(): void {
+        this.bkg = Sprite.from(BASE64_IMAGES.popupBkg);
+        this.bkg.anchor.set(0.5);
+        this.addChild(this.bkg);
     }
 
     private buildCheckmark(): void {
@@ -69,7 +65,7 @@ export class Popup extends Container {
         this.checkmark.anchor.set(0.5);
         this.checkmark.scale.set(1.3);
         this.checkmark.position.set(0, -this.height / 2 + 80);
-        this.wrapper.addChild(this.checkmark);
+        this.addChild(this.checkmark);
     }
 
     private buildTexts(): void {
@@ -80,8 +76,8 @@ export class Popup extends Container {
         });
         congrats.anchor.set(0.5);
         congrats.position.set(0, -70);
-        fitText(congrats, WIDTH);
-        this.wrapper.addChild(congrats);
+        fitText(congrats, WIDTH * 0.6);
+        this.addChild(congrats);
 
         const winningInfo = new Text(TEXTS[getTextLanguage()].content, {
             fill: 0xcecece,
@@ -92,8 +88,8 @@ export class Popup extends Container {
         });
         winningInfo.anchor.set(0.5);
         winningInfo.position.set(0, 10);
-        fitText(winningInfo, WIDTH);
-        this.wrapper.addChild(winningInfo);
+        fitText(winningInfo, WIDTH * 0.6);
+        this.addChild(winningInfo);
 
         const clickToClaim = new Text(TEXTS[getTextLanguage()].clickBelowToClaim, {
             fill: 0xcecece,
@@ -103,8 +99,8 @@ export class Popup extends Container {
         });
         clickToClaim.anchor.set(0.5);
         clickToClaim.position.set(0, 76);
-        fitText(clickToClaim, WIDTH);
-        this.wrapper.addChild(clickToClaim);
+        fitText(clickToClaim, WIDTH * 0.6);
+        this.addChild(clickToClaim);
     }
 
     private buildClaimButton(): void {
@@ -113,7 +109,7 @@ export class Popup extends Container {
         this.claimButton.position.set(0, 160);
         this.claimButton.eventMode = 'static';
         this.claimButton.on('pointerup', this.onMainButtonClick, this);
-        this.wrapper.addChild(this.claimButton);
+        this.addChild(this.claimButton);
 
         const claimText = new Text(TEXTS[getTextLanguage()].claim, {
             fill: 0xffffff,

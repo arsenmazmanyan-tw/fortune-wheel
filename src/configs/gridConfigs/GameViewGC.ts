@@ -22,12 +22,6 @@ const getGameViewGridLandscapeConfig = () => {
                 scale: CellScale.fit,
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
-            {
-                name: 'blocker',
-                scale: CellScale.envelop,
-                align: CellAlign.rightTop,
-                bounds: { x: 0, y: 0, width: 1, height: 1 },
-            },
         ],
     };
 };
@@ -46,12 +40,6 @@ const getGameViewGridPortraitConfig = () => {
             {
                 name: 'popup',
                 scale: CellScale.fit,
-                bounds: { x: 0, y: 0, width: 1, height: 1 },
-            },
-            {
-                name: 'blocker',
-                scale: CellScale.envelop,
-                align: CellAlign.rightTop,
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
         ],

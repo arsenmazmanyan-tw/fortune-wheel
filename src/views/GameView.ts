@@ -9,7 +9,6 @@ import { BASE64_IMAGES } from '../Images';
 export class GameView extends PixiGrid {
     private popup: Popup;
     private board: BoardView;
-    private blocker: Sprite;
 
     constructor() {
         super();
@@ -26,7 +25,6 @@ export class GameView extends PixiGrid {
 
     private build(): void {
         this.buildBoard();
-        this.buildBlocker();
         this.buildPopup();
     }
 
@@ -34,28 +32,12 @@ export class GameView extends PixiGrid {
         this.board = new BoardView();
         this.board.on('showPopup', () => {
             this.popup.show();
-            this.showBlocker();
         });
         this.setChild('board', this.board);
-    }
-
-    private showBlocker(): void {
-        anime({
-            targets: this.blocker,
-            alpha: 0.975,
-            duration: 300,
-            easing: 'easeInOutCubic',
-        });
     }
 
     private buildPopup(): void {
         this.popup = new Popup();
         this.setChild('popup', this.popup);
-    }
-
-    private buildBlocker(): void {
-        this.blocker = Sprite.from(BASE64_IMAGES.blocker);
-        this.blocker.alpha = 0;
-        this.setChild('blocker', this.blocker);
     }
 }

@@ -1,12 +1,12 @@
-import { blocker } from './images64/BlockerImage';
 import { checkmark } from './images64/CheckImage';
 import { greenButton } from './images64/GreenButton';
 import { ornament } from './images64/OrnamentImage';
+import { popupBkg } from './images64/PopupBkg';
 
 // images without text
 export const BASE64_IMAGES = {
     ornament,
-    blocker,
+    popupBkg,
     checkmark,
     greenButton,
 };
