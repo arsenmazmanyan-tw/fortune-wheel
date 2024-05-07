@@ -19,7 +19,7 @@ const getGameViewGridLandscapeConfig = () => {
             },
             {
                 name: 'popup',
-                scale: CellScale.fit,
+                scale: CellScale.showAll,
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
         ],

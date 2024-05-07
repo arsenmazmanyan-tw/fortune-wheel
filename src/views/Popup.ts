@@ -4,8 +4,10 @@ import { BASE64_IMAGES } from '../Images';
 import { fitText, getTextLanguage, openAffiliatePage } from '../Utils';
 import { TEXTS } from '../configs/Texts';
 
-const WIDTH = 794;
+const WIDTH = 810;
 const HEIGHT = 600;
+
+const TEXT_GRAY = 0x999999;
 
 export class Popup extends Container {
     private bkg: Sprite;
@@ -16,6 +18,8 @@ export class Popup extends Container {
     constructor() {
         super();
         this.build();
+
+        this.bkg.scale.set(0);
     }
 
     public getBounds(): Rectangle {
@@ -25,7 +29,7 @@ export class Popup extends Container {
     public hide(): any {
         this.clicksEnabled = false;
         return anime({
-            targets: this.scale,
+            targets: this.bkg.scale,
             x: 0,
             y: 0,
             duration: 300,
@@ -34,9 +38,8 @@ export class Popup extends Container {
     }
 
     public show(): void {
-        this.visible = true;
         anime({
-            targets: this.scale,
+            targets: this.bkg.scale,
             x: 1,
             y: 1,
             duration: 300,
@@ -63,53 +66,43 @@ export class Popup extends Container {
     private buildCheckmark(): void {
         this.checkmark = Sprite.from(BASE64_IMAGES.checkmark);
         this.checkmark.anchor.set(0.5);
-        this.checkmark.scale.set(1.3);
-        this.checkmark.position.set(0, -this.height / 2 + 80);
-        this.addChild(this.checkmark);
+        this.checkmark.scale.set(1.2);
+        this.checkmark.position.set(0, -150);
+        this.bkg.addChild(this.checkmark);
     }
 
     private buildTexts(): void {
-        const congrats = new Text(TEXTS[getTextLanguage()].congratulations, {
+        const { congratulations, content, clickBelowToClaim } = TEXTS[getTextLanguage()];
+        const congrats = new Text(congratulations, {
             fill: 0xffffff,
             fontSize: 36,
             fontWeight: '900',
         });
         congrats.anchor.set(0.5);
-        congrats.position.set(0, -70);
+        congrats.position.set(0, -10);
         fitText(congrats, WIDTH * 0.6);
-        this.addChild(congrats);
+        this.bkg.addChild(congrats);
 
-        const winningInfo = new Text(TEXTS[getTextLanguage()].content, {
-            fill: 0xcecece,
+        const winningInfo = new Text(`${content}\n${clickBelowToClaim}`, {
+            fill: TEXT_GRAY,
             fontSize: 26,
             fontWeight: '400',
             lineHeight: 34,
             align: 'center',
         });
         winningInfo.anchor.set(0.5);
-        winningInfo.position.set(0, 10);
+        winningInfo.position.set(0, 85);
         fitText(winningInfo, WIDTH * 0.6);
-        this.addChild(winningInfo);
-
-        const clickToClaim = new Text(TEXTS[getTextLanguage()].clickBelowToClaim, {
-            fill: 0xcecece,
-            fontSize: 16,
-            fontWeight: '400',
-            align: 'center',
-        });
-        clickToClaim.anchor.set(0.5);
-        clickToClaim.position.set(0, 76);
-        fitText(clickToClaim, WIDTH * 0.6);
-        this.addChild(clickToClaim);
+        this.bkg.addChild(winningInfo);
     }
 
     private buildClaimButton(): void {
         this.claimButton = Sprite.from(BASE64_IMAGES.greenButton);
         this.claimButton.anchor.set(0.5);
-        this.claimButton.position.set(0, 160);
+        this.claimButton.position.set(0, 200);
         this.claimButton.eventMode = 'static';
         this.claimButton.on('pointerup', this.onMainButtonClick, this);
-        this.addChild(this.claimButton);
+        this.bkg.addChild(this.claimButton);
 
         const claimText = new Text(TEXTS[getTextLanguage()].claim, {
             fill: 0xffffff,

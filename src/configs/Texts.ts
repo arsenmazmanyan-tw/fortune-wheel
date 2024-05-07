@@ -1,7 +1,7 @@
 export const TEXTS = {
     en: {
         congratulations: 'Congratulations!',
-        content: 'You just won 200 freespins with up to 200 USDT\nfor Sevens&Fruits game by Playson!',
+        content: 'You just won 200 freespins with up to 200\nUSDT for Sevens&Fruits game by Playson!',
         clickBelowToClaim: 'Click below to claim them!',
         claim: 'Claim! 🎉',
     },
